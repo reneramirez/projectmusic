@@ -5,6 +5,7 @@
     <select v-model="slctCountry">
       <option v-for="country in countries" v-bind:value="country.value">{{country.name}}</option>
     </select>
+    <spinner v-show="loading"></spinner>
     <ul>
       <artist v-for="artist in artists" v-bind:artist="artist" v-bind:key="artist.mbid"></artist>
     </ul>
@@ -14,6 +15,7 @@
 <script>
 const api = require('./api');
 import Artist from './components/Artist.vue';
+import Spinner from './components/spinner.vue';
 
 export default {
   name: 'app',
@@ -26,16 +28,21 @@ export default {
         {name:'España',   value:'spain'}
       ],
       slctCountry: 'chile',
+      loading: true,
     }
   },
   components:{
-    Artist
+    Artist,
+    Spinner,
   },
   methods:{
     refreshArtists(){
       const seft = this;
+      seft.artists = [];
+      this.loading = true;
       api.getArtist(this.slctCountry)
       .then( function (artists) {
+        seft.loading = false;
         seft.artists = artists;
       });
     },
