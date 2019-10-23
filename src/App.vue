@@ -3,13 +3,14 @@
     <img src="./assets/logo.png">
     <h1>proyectmusic</h1>
     <ul>
-      <li v-for="artist in artists">{{artist.name}}</li>
+      <artist v-for="artist in artists" v-bind:artist="artist" v-bind:key="artist.mbid"></artist>
     </ul>
   </div>
 </template>
 
 <script>
 const api = require('./api');
+import Artist from './components/Artist.vue';
 
 export default {
   name: 'app',
@@ -17,6 +18,9 @@ export default {
     return {
       artists: []
     }
+  },
+  components:{
+    Artist
   },
   mounted: function () {
     const seft = this;
