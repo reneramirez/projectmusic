@@ -2,6 +2,9 @@
   <div id="app">
     <img src="./assets/logo.png">
     <h1>proyectmusic</h1>
+    <select v-model="slctCountry">
+      <option v-for="country in countries" v-bind:value="country.value">{{country.name}}</option>
+    </select>
     <ul>
       <artist v-for="artist in artists" v-bind:artist="artist" v-bind:key="artist.mbid"></artist>
     </ul>
@@ -16,17 +19,34 @@ export default {
   name: 'app',
   data () {
     return {
-      artists: []
+      artists: [],
+      countries: [
+        {name:'Chile',    value:'chile'},
+        {name:'Colombia', value:'colombia'},
+        {name:'España',   value:'spain'}
+      ],
+      slctCountry: 'chile',
     }
   },
   components:{
     Artist
   },
-  mounted: function () {
-    const seft = this;
-    api.getArtist().then( function (artists) {
-      seft.artists = artists;
-    });
+  methods:{
+    refreshArtists(){
+      const seft = this;
+      api.getArtist(this.slctCountry)
+      .then( function (artists) {
+        seft.artists = artists;
+      });
+    },
+  },
+  mounted() {
+    this.refreshArtists();
+  },
+  watch:{
+    slctCountry(){
+      this.refreshArtists();
+    }
   }
 }
 </script>
