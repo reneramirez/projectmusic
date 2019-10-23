@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="https://reneramirez.github.io/projectmusic/dist/logo.png">
     <h1>proyectmusic</h1>
     <select v-model="slctCountry">
       <option v-for="country in countries" v-bind:value="country.value">{{country.name}}</option>
