@@ -7,7 +7,9 @@ function getArtist(country) {
   return fetch(url)
     .then(res => res.json())
     .then(json => json.topartists.artist)
-    .catch( e=> console.log(e));
+    .catch(e=> {
+    	console.log(e)
+    });
     
 }
 
