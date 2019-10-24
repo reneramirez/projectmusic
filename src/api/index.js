@@ -1,5 +1,5 @@
 const conf = require('./config');
-const URL =`https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=:country&api_key=${conf.default.apikey}&format=json`;
+const URL =`http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=:country&api_key=${conf.default.apikey}&format=json`;
 
 function getArtist(country) {
 	console.log(country);
